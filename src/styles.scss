@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import "../node_modules/ngx-toastr/toastr.css";
+
+@include mat-core();
+
+@import './themes/black-theme.scss';
+@import './themes/light-theme.scss';
+
+.my-light-theme {
+    @include angular-material-theme($my-light-theme);
+}
+  
+.my-dark-theme {
+    @include angular-material-theme($my-black-theme);
+}
+
+html, body, app-root  {
+  /* overflow: hidden; */
+  height: 100%;
+  min-height: 100%;
+  margin: 0px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}

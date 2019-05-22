@@ -1,0 +1,23 @@
+<div [class]="theme" (window:resize)="onResize($event)">
+
+  <mat-sidenav-container class="sidenav-container" [hasBackdrop]="isMobile">
+
+    <mat-sidenav #leftSidenav [opened]="!isMobile" [mode]="isMobile ? 'over' : 'side'">
+      <mat-toolbar class="menu">
+        <mat-toolbar-row>
+          <h2> Menu </h2>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+      <app-menu></app-menu>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <app-header  [sidenav]="leftSidenav"></app-header>
+      <div class="main_content" >
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</div>

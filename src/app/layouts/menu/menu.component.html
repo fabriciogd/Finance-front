@@ -1,0 +1,5 @@
+<mat-nav-list>
+  <mat-list-item [routerLink]="[item.link]" *ngFor="let item of items">
+    <h4 mat-line>{{ item.title }}</h4>
+  </mat-list-item>
+</mat-nav-list>

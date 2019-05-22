@@ -1,0 +1,43 @@
+<h4>Editar despesa</h4>
+
+<mat-toolbar fxLayoutGap="10px">
+    <button type="submit" form="ngForm" [disabled]="!despesasForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+    <button mat-flat-button color="primary" (click)="goBack()"><mat-icon>keyboard_backspace</mat-icon></button>
+</mat-toolbar>
+
+<mat-card >  
+    <form 
+      id="ngForm"
+      fxLayoutGap="17px"
+      fxLayout="column"
+      fxFlex="30" 
+      fxFlex.lt-lg="35" 
+      fxFlex.lt-md="50" 
+      fxFlex.lt-sm="100" 
+      [formGroup]="despesasForm" 
+      (ngSubmit)="onFormSubmit(despesasForm.value)">
+
+        <mat-form-field>  
+            <mat-label>Descricao</mat-label>
+            <input formControlName="descricao" matInput>  
+            <mat-error *ngIf="f.descricao.touched  && f.descricao.errors && f.descricao.errors.required">Descricao is required</mat-error>
+        </mat-form-field>  
+
+        <mat-form-field>
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="categoria">
+                <mat-option *ngFor="let categoria of categorias" [value]="categoria.enumerado">
+                {{categoria.descricao}}
+            </mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.categoria.touched && f.categoria.errors && f.categoria.errors.required">Categoria is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>  
+            <mat-label>Preco</mat-label>
+            <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" formControlName="preco" matInput>  
+            <mat-error *ngIf="f.preco.touched && f.preco.errors && f.preco.errors.required">Preco is required</mat-error>
+        </mat-form-field>  
+    </form>
+    
+</mat-card>  

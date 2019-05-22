@@ -1,0 +1,56 @@
+<h4>Despesas</h4>
+
+<mat-toolbar>
+    <button mat-raised-button color="primary" [routerLink]="['/despesas/novo/']">Adicionar</button>
+</mat-toolbar>
+
+<div fxLayout="column" fxLayoutAlign="start end" class="filtros">
+    <div fxLayout="row" fxLayout.lt-sm="column" fxFill fxLayoutGap="17px">
+        <mat-form-field floatLabel="never" fxFlex="100">
+            <input matInput [(ngModel)]="despesa" placeholder="Despesa" />
+        </mat-form-field>
+
+        <mat-form-field floatLabel="never" fxFlex="100">
+            <input matInput [(ngModel)]="categoria" placeholder="Categoria"/>
+        </mat-form-field>
+
+        <mat-form-field floatLabel="never" fxFlex="100">
+            <input matInput [(ngModel)]="preco" placeholder="Preço"/>
+        </mat-form-field>
+
+    </div>
+
+    <button mat-flat-button color="primary" (click)="filter()">Fitrar</button>
+</div>
+
+<mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="despesa">
+        <mat-header-cell *matHeaderCellDef> Despesa </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.descricao}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="categoria">
+        <mat-header-cell *matHeaderCellDef> Categoria </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.categoriaDescricao}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="preco">
+        <mat-header-cell  *matHeaderCellDef> Preco </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.preco | currency }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <button mat-icon-button (click)="delete(row.id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button (click)="edit(row.id)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
